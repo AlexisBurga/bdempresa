@@ -14,7 +14,7 @@ public class PrincipalDepartamento {
 
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		
-		DepartamentoDao departamentoDao = context.getBean("departamentoImpl" , DepartamentoDao.class);
+		DepartamentoDao departamentoDao = context.getBean("departamentoDaoImpl" , DepartamentoDao.class);
 		List<Departamento> departamentos= departamentoDao.findAll();
 		
 		departamentos.forEach(item -> {

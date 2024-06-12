@@ -3,10 +3,18 @@ package com.distribuida.entities;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+
+@Component
+@Entity
+@Table(name = "departamento")
 public class Departamento {
 	
 	@Id
@@ -15,8 +23,8 @@ public class Departamento {
 	private int idDepartamento;
 	@Column(name = "nombreDpto")
 	private String nombreDpto;
-	@Column(name = "numeroDpt")
-	private int numeroDpto;
+	@Column(name = "numeroDpto")
+	private String numeroDpto;
 	@Column(name = "dniDirector")
 	private String dniDirector;
 	@Column(name = "fechaIngresoDirector")
@@ -24,8 +32,8 @@ public class Departamento {
 	
 	public Departamento() {}
 
-	public Departamento(String nombreDpto, int numeroDpto, String dniDirector, Date fechaIngresoDirector) {
-		
+	public Departamento(int idDepartamento,String nombreDpto, String numeroDpto, String dniDirector, Date fechaIngresoDirector) {
+		this.idDepartamento = idDepartamento;
 		this.nombreDpto = nombreDpto;
 		this.numeroDpto = numeroDpto;
 		this.dniDirector = dniDirector;
@@ -40,11 +48,11 @@ public class Departamento {
 		this.nombreDpto = nombreDpto;
 	}
 
-	public int getNumeroDpto() {
+	public String getNumeroDpto() {
 		return numeroDpto;
 	}
 
-	public void setNumeroDpto(int numeroDpto) {
+	public void setNumeroDpto(String numeroDpto) {
 		this.numeroDpto = numeroDpto;
 	}
 
