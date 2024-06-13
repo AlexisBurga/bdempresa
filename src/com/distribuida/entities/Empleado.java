@@ -2,158 +2,188 @@ package com.distribuida.entities;
 
 import java.util.Date;
 
-
-import javax.persistence.Table;
-
-import org.springframework.stereotype.Component;
-
-
-
-import org.hibernate.annotations.Columns;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import org.springframework.stereotype.Component;
 
-	
-@Component 
+@Component
 @Entity
 @Table(name = "empleado")
-
 public class Empleado {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_empleado")
-	private int idEmpleado;
-	@Column(name = "nombre")
-	  private String nombre;
-	@Column(name = "apellido1")
-	  private String apellido1;
-	@Column(name = "apellido2")
-	  private String apellido2;
-	@Column(name = "dni")
-	  private String dni;
-	@Column(name = "fechaNac")
-	  private Date fechaNac;
-	@Column(name = "direccion")
-	  private String direccion;
-	@Column(name = "sexo")
-	  private char sexo;
-	@Column(name = "sueldo")
-	  private double sueldo; 
-	@Column(name = "superDni")
-	  private String superDni;
-	@Column(name = "dno")
-	  private int dno;
-	  
-	  public Empleado() {}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_empleado")
+    private int idEmpleado;
 
-	public Empleado(int idEmpleado,String nombre, String apellido1, String apellido2, String dni, Date fechaNac, String direccion,
-			char sexo, double sueldo, String superDni, int dno) {
-		this.idEmpleado = idEmpleado;
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.dni = dni;
-		this.fechaNac = fechaNac;
-		this.direccion = direccion;
-		this.sexo = sexo;
-		this.sueldo = sueldo;
-		this.superDni = superDni;
-		this.dno = dno;
-	}
-	
-	public int getidEmpleado() {
-		return idEmpleado;
-	}
+    @Column(name = "nombre")
+    private String nombre;
 
+    @Column(name = "apellido1")
+    private String apellido1;
 
-	public void setidEmpleado(int idEmpleado) {
-		this.idEmpleado = idEmpleado;
-	}
+    @Column(name = "apellido2")
+    private String apellido2;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @Column(name = "dni")
+    private String dni;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    @Column(name = "fechaNac")
+    private Date fechaNac;
 
-	public String getApellido1() {
-		return apellido1;
-	}
+    @Column(name = "direccion")
+    private String direccion;
 
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
-	}
+    @Column(name = "sexo")
+    private char sexo;
 
-	public String getApellido2() {
-		return apellido2;
-	}
+    @Column(name = "sueldo")
+    private double sueldo;
 
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
-	}
+    @Column(name = "superDni")
+    private String superDni;
 
-	public String getDni() {
-		return dni;
-	}
+    @Column(name = "dno")
+    private int dno;
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+    @ManyToOne
+    @JoinColumn(name = "superDni", referencedColumnName = "dni", foreignKey = @ForeignKey(name = "FK_SUPERDNI"))
+    private Empleado supervisor;
 
-	public Date getFechaNac() {
-		return fechaNac;
-	}
+    @ManyToOne
+    @JoinColumn(name = "dno", referencedColumnName = "id_departamento", foreignKey = @ForeignKey(name = "FK_DNO"))
+    private Departamento departamento;
 
-	public void setFechaNac(Date fechaNac) {
-		this.fechaNac = fechaNac;
-	}
+    public Empleado() {}
 
-	public String getDireccion() {
-		return direccion;
-	}
+    public Empleado(int idEmpleado, String nombre, String apellido1, String apellido2, String dni, Date fechaNac, String direccion,
+                    char sexo, double sueldo, String superDni, int dno) {
+        this.idEmpleado = idEmpleado;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.dni = dni;
+        this.fechaNac = fechaNac;
+        this.direccion = direccion;
+        this.sexo = sexo;
+        this.sueldo = sueldo;
+        this.superDni = superDni;
+        this.dno = dno;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    // Getters and setters
+    public int getIdEmpleado() {
+        return idEmpleado;
+    }
 
-	public char getSexo() {
-		return sexo;
-	}
+    public void setIdEmpleado(int idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
-	public void setSexo(char sexo) {
-		this.sexo = sexo;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public double getSueldo() {
-		return sueldo;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setSueldo(double sueldo) {
-		this.sueldo = sueldo;
-	}
+    public String getApellido1() {
+        return apellido1;
+    }
 
-	public String getSuperDni() {
-		return superDni;
-	}
+    public void setApellido1(String apellido1) {
+        this.apellido1 = apellido1;
+    }
 
-	public void setSuperDni(String superDni) {
-		this.superDni = superDni;
-	}
+    public String getApellido2() {
+        return apellido2;
+    }
 
-	public int getDno() {
-		return dno;
-	}
+    public void setApellido2(String apellido2) {
+        this.apellido2 = apellido2;
+    }
 
-	public void setDno(int dno) {
-		this.dno = dno;
-	}
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public Date getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(Date fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public double getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(double sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public String getSuperDni() {
+        return superDni;
+    }
+
+    public void setSuperDni(String superDni) {
+        this.superDni = superDni;
+    }
+
+    public int getDno() {
+        return dno;
+    }
+
+    public void setDno(int dno) {
+        this.dno = dno;
+    }
+
+    public Empleado getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(Empleado supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
 
 	@Override
 	public String toString() {
